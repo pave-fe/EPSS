@@ -1,13 +1,14 @@
 import requests
 import gzip
 import csv
+import os
 
 def download_and_unzip_gzip(url, output_file):
     response = requests.get(url, stream=True)
 
     if response.status_code == 200:
         with open(output_file, "wb") as f:
-            for chunk in response.iter_content(chunk_size=8192):
+            for    os.remove(gzip_file) chunk in response.iter_content(chunk_size=8192):
                 f.write(chunk)
     else:
         raise Exception(f"Failed to download the file from {url}. Status code: {response.status_code}")
@@ -33,5 +34,7 @@ if __name__ == "__main__":
             f.write(gz.read())
 
     remove_first_row(csv_file, csv_file)
+
+    os.remove(gzip_file)
 
     print("Download, unzip, and CSV manipulation completed successfully.")
